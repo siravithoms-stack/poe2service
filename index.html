@@ -859,15 +859,15 @@
             }
 
             let total = 0;
-            let text = "🎮 สั่งซื้อบริการ Path of Exile 2 (พ่อค้า VIP-5050)\n";
-            text += "--------------------------------------\n";
+            let text = "🎮 สั่งซื้อบริการ Poe2 🎮\n";
+            text += "-------------------------------\n";
             cart.forEach((item, index) => {
                 total += item.price;
                 text += `${index + 1}. ${item.name} (${item.price} บาท)\n`;
             });
-            text += "--------------------------------------\n";
+            text += "-------------------------------\n";
             text += `💰 ยอดรวมทั้งสิ้น: ${total.toLocaleString()} บาท\n`;
-            text += "รอพ่อค้าส่ง QR Code สักครู่";
+            text += "⌛รอพ่อค้าส่ง QR Code สักครู่⌛";
 
             copyTextToClipboard(text);
             showToast('คัดลอกสรุปรายการแล้ว! วางในแชทได้เลย 📋');
