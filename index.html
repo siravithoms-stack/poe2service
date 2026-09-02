@@ -948,12 +948,12 @@
 
             let total = 0;
             let text = "🎮 สั่งซื้อบริการ POE2 🎮\n";
-            text += "--------------------------------------\n";
+            text += "---------------------------------\n";
             cart.forEach((item, index) => {
                 total += item.price;
                 text += `${index + 1}. ${item.name} (${item.price} บาท)\n`;
             });
-            text += "--------------------------------------\n";
+            text += "---------------------------------\n";
             text += `💰 ยอดรวมทั้งสิ้น: ${total.toLocaleString()} บาท\n`;
             text += "⌛ รอพ่อค้าส่ง QR Code สักครู่";
 
