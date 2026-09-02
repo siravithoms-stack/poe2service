@@ -106,10 +106,33 @@
 </head>
 <body class="selection:bg-brand-yellow selection:text-brand-dark min-h-screen flex flex-col justify-between">
 
-    <!-- Hero Section -->
-    <section class="max-w-6xl mx-auto px-4 pt-8 sm:pt-10 pb-6 w-full">
-        <div class="bg-brand-surface border-[2.5px] border-brand-dark rounded-3xl p-6 sm:p-10 shadow-nb-lg">
-            <div class="max-w-3xl">
+<!-- Style สำหรับควบคุม Animation (ใส่ไว้ด้วยกันเพื่อให้ขยับได้ทันที) -->
+<style>
+    @keyframes hud-float-gentle {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-7px) rotate(1deg); }
+    }
+    @keyframes hud-float-alt {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(7px) rotate(-1.5deg); }
+    }
+    @keyframes hud-liquid-wave {
+        0%, 100% { transform: scaleY(1) translateY(0); }
+        50% { transform: scaleY(1.06) translateY(-3px); }
+    }
+    .hud-anim-float { animation: hud-float-gentle 4s ease-in-out infinite; }
+    .hud-anim-float-alt { animation: hud-float-alt 3.5s ease-in-out infinite; }
+    .hud-anim-wave { animation: hud-liquid-wave 2.8s ease-in-out infinite; }
+</style>
+
+<!-- Hero Section -->
+<section class="max-w-6xl mx-auto px-4 pt-8 sm:pt-10 pb-6 w-full">
+    <div class="bg-brand-surface border-[2.5px] border-brand-dark rounded-3xl p-6 sm:p-10 shadow-nb-lg relative overflow-hidden">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Side (ข้อมูลเดิมของคุณ 100%) -->
+            <div class="lg:col-span-7 z-10">
                 <!-- Verified Badge -->
                 <div class="inline-flex items-center gap-2 bg-brand-grayBg px-3.5 py-1.5 rounded-full border-2 border-brand-dark shadow-nb-sm mb-5 text-xs font-bold text-brand-dark">
                     <span class="w-2.5 h-2.5 rounded-full bg-brand-green border border-brand-dark"></span>
@@ -118,7 +141,7 @@
 
                 <h1 class="text-3xl sm:text-5xl font-black text-brand-dark leading-tight tracking-tight mb-4">
                     บริการรับจ้างเกม <br>
-                    <span class="bg-brand-yellow px-3 py-0.5 rounded-xl border-2 border-brand-dark inline-block mt-1">
+                    <span class="bg-brand-yellow px-3 py-0.5 rounded-xl border-2 border-brand-dark inline-block mt-1 shadow-nb-sm">
                         PATH OF EXILE II
                     </span>
                 </h1>
@@ -139,12 +162,76 @@
                     </button>
                     <a href="https://docs.google.com/spreadsheets/d/1O43FMUbWP5bVJTLMd7nfM8Jx1WFe9YHsylHF42LeMTM/edit?gid=650220014#gid=650220014" target="_blank" rel="noopener noreferrer" class="nb-btn bg-brand-green text-brand-dark font-bold text-sm sm:text-base px-5 py-3 rounded-xl flex items-center gap-2">
                         <i class="fas fa-shield-halved text-brand-dark"></i>
-                        <span>เช็คเครดิตพ่อค้า VIP</span>
+                        <span>ตรวจสอบรายชื่อพ่อค้า VIP</span>
                     </a>
                 </div>
             </div>
+
+            <!-- Right Side: Life & Mana HUD + 4 Resistance Flasks (Pure Visual) -->
+            <div class="lg:col-span-5 relative flex items-center justify-center min-h-[350px] select-none">
+                
+                <!-- Main HUD Card with Gentle Float Motion -->
+                <div class="hud-anim-float w-full max-w-[340px] bg-white border-[2.5px] border-brand-dark p-5 rounded-3xl shadow-nb-xl relative">
+                    
+                    <!-- Globes Row -->
+                    <div class="flex items-center justify-between relative z-10 mb-4">
+                        
+                        <!-- Life Globe -->
+                        <div class="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full border-[2.5px] border-brand-dark bg-red-100 overflow-hidden shadow-nb flex items-end justify-center">
+                            <div class="w-full h-4/5 bg-gradient-to-t from-red-700 via-red-500 to-rose-400 rounded-b-full border-t-2 border-brand-dark/40 hud-anim-wave"></div>
+                            <div class="absolute inset-0 flex items-center justify-center text-white text-2xl drop-shadow-md">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="absolute top-2 left-3 w-4 h-4 bg-white/70 rounded-full blur-[1px]"></div>
+                        </div>
+
+                        <!-- Center Crest: Shield Icon with Light Gray BG -->
+                        <div class="flex items-center justify-center">
+                            <div class="w-12 h-12 rounded-2xl bg-gray-200 border-2 border-brand-dark shadow-nb flex items-center justify-center text-brand-dark text-xl">
+                                <i class="fas fa-shield-halved"></i>
+                            </div>
+                        </div>
+
+                        <!-- Mana Globe (Lightning Icon) -->
+                        <div class="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full border-[2.5px] border-brand-dark bg-blue-100 overflow-hidden shadow-nb flex items-end justify-center">
+                            <div class="w-full h-4/5 bg-gradient-to-t from-blue-700 via-blue-500 to-cyan-400 rounded-b-full border-t-2 border-brand-dark/40 hud-anim-wave"></div>
+                            <div class="absolute inset-0 flex items-center justify-center text-white text-2xl drop-shadow-md">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div class="absolute top-2 left-3 w-4 h-4 bg-white/70 rounded-full blur-[1px]"></div>
+                        </div>
+                    </div>
+
+                    <!-- 4 Elemental & Chaos Resistance Flasks Bar (No Top Caps) -->
+                    <div class="bg-amber-50/80 border-2 border-brand-dark rounded-2xl p-2.5 shadow-nb-sm grid grid-cols-4 gap-2">
+                        <!-- Fire (ไฟ) -->
+                        <div class="h-14 rounded-xl bg-orange-500 border-2 border-brand-dark shadow-nb-sm flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <!-- Cold (น้ำแข็ง) -->
+                        <div class="h-14 rounded-xl bg-cyan-400 border-2 border-brand-dark shadow-nb-sm flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-snowflake"></i>
+                        </div>
+                        <!-- Lightning (สายฟ้า) -->
+                        <div class="h-14 rounded-xl bg-brand-yellow border-2 border-brand-dark shadow-nb-sm flex items-center justify-center text-brand-dark text-lg">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <!-- Chaos (เคออส - สีม่วง) -->
+                        <div class="h-14 rounded-xl bg-purple-600 border-2 border-brand-dark shadow-nb-sm flex items-center justify-center text-white text-lg">
+                            <i class="fas fa-biohazard"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Star Badge -->
+                <div class="hud-anim-float-alt absolute -top-3 -right-2 bg-brand-yellow border-2 border-brand-dark p-2 rounded-xl shadow-nb rotate-12 text-brand-dark">
+                    <i class="fas fa-sparkles"></i>
+                </div>
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Services Section Header -->
     <section id="services-list" class="max-w-6xl mx-auto px-4 pt-6 pb-4 w-full">
@@ -173,7 +260,7 @@
                         </span>
                     </div>
 
-                    <h3 class="font-display font-black text-xl text-brand-dark leading-snug mb-4">
+                    <h3 class="font-kanit font-bold text-xl text-brand-dark leading-snug mb-4">
                         วิ่ง Act 1 - Endgame
                     </h3>
 
@@ -198,12 +285,12 @@
                 <div class="absolute top-0 right-0 w-24 h-24 bg-brand-blue/20 rounded-bl-full pointer-events-none -mr-4 -mt-4 border-b-2 border-l-2 border-brand-dark"></div>
                 <div>
                     <div class="flex items-center justify-between mb-4">
-                        <span class="inline-block bg-brand-blue text-white px-3 py-1 rounded-xl border-2 border-brand-dark font-black text-xs shadow-nb-sm">
+                        <span class="inline-block bg-brand-blue text-black px-3 py-1 rounded-xl border-2 border-brand-dark font-black text-xs shadow-nb-sm">
                             02. PASSIVES
                         </span>
                     </div>
 
-                    <h3 class="font-display font-black text-xl text-brand-dark leading-snug mb-4">
+                    <h3 class="font-kanit font-bold text-xl text-brand-dark leading-snug mb-4">
                         ปลดแต้ม 1-8
                     </h3>
 
@@ -228,12 +315,12 @@
                 <div class="absolute top-0 right-0 w-24 h-24 bg-brand-coral/20 rounded-bl-full pointer-events-none -mr-4 -mt-4 border-b-2 border-l-2 border-brand-dark"></div>
                 <div>
                     <div class="flex items-center justify-between mb-4">
-                        <span class="inline-block bg-brand-coral text-white px-3 py-1 rounded-xl border-2 border-brand-dark font-black text-xs shadow-nb-sm">
+                        <span class="inline-block bg-brand-coral text-black px-3 py-1 rounded-xl border-2 border-brand-dark font-black text-xs shadow-nb-sm">
                             03. BUILDS
                         </span>
                     </div>
 
-                    <h3 class="font-display font-black text-xl text-brand-dark leading-snug mb-4">
+                    <h3 class="font-kanit font-black text-xl text-brand-dark leading-snug mb-4">
                         รับจัดบิ้ว & แก้บิ้วตามงบ
                     </h3>
 
@@ -258,12 +345,12 @@
                 <div class="absolute top-0 right-0 w-24 h-24 bg-brand-purple/20 rounded-bl-full pointer-events-none -mr-4 -mt-4 border-b-2 border-l-2 border-brand-dark"></div>
                 <div>
                     <div class="flex items-center justify-between mb-4">
-                        <span class="inline-block bg-brand-purple text-white px-3 py-1 rounded-xl border-2 border-brand-dark font-black text-xs shadow-nb-sm">
+                        <span class="inline-block bg-brand-purple text-black px-3 py-1 rounded-xl border-2 border-brand-dark font-black text-xs shadow-nb-sm">
                             04. LEVEL & ATLAS
                         </span>
                     </div>
 
-                    <h3 class="font-display font-black text-xl text-brand-dark leading-snug mb-4">
+                    <h3 class="font-kanit font-black text-xl text-brand-dark leading-snug mb-4">
                         พาเวล 60-90 & แต้ม Atlas
                     </h3>
 
@@ -293,8 +380,8 @@
                         </span>
                     </div>
 
-                    <h3 class="font-display font-black text-xl text-brand-dark leading-snug mb-4">
-                        ฟาร์มทองด่วน (Gold Farming)
+                    <h3 class="font-kanit font-black text-xl text-brand-dark leading-snug mb-4">
+                        ฟาร์มทอง (Gold Farming)
                     </h3>
 
                     <!-- Visual Icon Centerpiece -->
@@ -326,19 +413,19 @@
                         <i class="fas fa-calculator"></i>
                         <span>CART</span>
                     </div>
-                    <h2 class="font-display font-black text-2xl sm:text-3xl text-brand-dark tracking-tight">ระบบคำนวณราคาค่าบริการ</h2>
+                    <h2 class="font-display font-black text-2xl sm:text-3xl text-brand-dark tracking-tight">คำนวณค่าบริการ</h2>
                     <p class="text-xs sm:text-sm font-semibold text-gray-600 mt-1">เลือกรายการที่ต้องการเพื่อรวมยอด แล้วคัดลอกสรุปรายการไปส่งในแชทได้ทันที</p>
                 </div>
 
                 <div class="flex items-center gap-2">
-                    <button onclick="clearCalc()" class="nb-btn bg-brand-surfaceAlt text-gray-700 font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5">
+                    <button onclick="clearCalc()" class="nb-btn bg-brand-coral text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5">
                         <i class="fas fa-rotate-left"></i>
                         <span>ล้างรายการ</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Quick Add Pill Buttons -->
+            <!-- Quick Add Pill Buttons 
             <div class="mb-6">
                 <span class="text-xs font-bold text-gray-700 block mb-2.5">⚡ กดเพิ่มแพ็คเกจด่วน:</span>
                 <div class="flex flex-wrap gap-2">
@@ -361,7 +448,7 @@
                         + ฟาร์มทอง (40฿)
                     </button>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Calculator Summary Box -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -369,14 +456,14 @@
                 <!-- Selected Items List -->
                 <div class="lg:col-span-2 bg-brand-surfaceAlt border-2 border-brand-dark rounded-2xl p-4 sm:p-5">
                     <div class="flex items-center justify-between pb-3 mb-3 border-b border-brand-dark/20">
-                        <span class="text-xs font-black text-brand-dark uppercase">รายการที่เลือก (<span id="cartCount">0</span>)</span>
-                        <span class="text-[11px] text-gray-500 font-semibold">กดไอคอนถังขยะเพื่อลบ</span>
+                        <span class="text-sm font-black text-brand-dark uppercase">รายการที่เลือก (<span id="cartCount">0</span>)</span>
+                        
                     </div>
 
                     <div id="cartItemsList" class="space-y-2 max-h-56 overflow-y-auto pr-1">
-                        <div class="text-center py-6 text-gray-500 font-medium text-xs">
+                        <div class="flex flex-col items-center justify-center min-h-[14rem] text-center text-gray-500 font-medium text-base">
                             ยังไม่มีรายการที่เลือก<br>
-                            <span class="text-[11px] text-gray-400">กดปุ่ม "+ ตะกร้า" ที่การ์ดด้านบนเพื่อคำนวณ</span>
+                            <span class="text-[14px] text-gray-500">กดปุ่ม "+ ตะกร้า" ที่รายการด้านบนเพื่อคำนวณ</span>
                         </div>
                     </div>
                 </div>
@@ -389,8 +476,8 @@
                             <span id="cartTotalDisplay" class="font-display font-black text-4xl sm:text-5xl text-brand-dark">0</span>
                             <span class="font-bold text-sm text-gray-600">บาท</span>
                         </div>
-                        <p class="text-[11px] font-semibold text-gray-600 leading-relaxed">
-                            *ยอดสุทธิพร้อมเริ่มงานทันที สามารถกดคัดลอกสรุปรายการแล้วนำไปส่งใน Facebook Messenger ได้เลยครับ
+                        <p class="text-[13px] font-semibold text-gray-600 leading-relaxed">
+                            *ยอดสุทธิ สามารถกดคัดลอกสรุปรายการแล้วส่งไปใน Facebook Messenger ได้เลยครับ
                         </p>
                     </div>
 
@@ -399,7 +486,7 @@
                             <i class="fas fa-copy"></i>
                             <span>คัดลอกสรุปรายการสั่งซื้อ</span>
                         </button>
-                        <a href="https://www.facebook.com/iamfuufee/" target="_blank" rel="noopener noreferrer" class="nb-btn w-full bg-brand-blue text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2">
+                        <a href="https://www.facebook.com/iamfuufee/" target="_blank" rel="noopener noreferrer" class="nb-btn w-full bg-brand-blue text-white font-bold text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2">
                             <i class="fab fa-facebook-messenger"></i>
                             <span>ส่งข้อความหาพ่อค้า</span>
                         </a>
@@ -424,7 +511,7 @@
 
                 <!-- Text Details -->
                 <div>
-                    <div class="inline-block bg-brand-surface px-3 py-0.5 rounded-full border-2 border-brand-dark shadow-nb-sm text-[10px] sm:text-xs font-black uppercase tracking-wider mb-1">
+                    <div class="inline-block bg-brand-green px-3 py-0.5 rounded-full border-2 border-brand-dark shadow-nb-sm text-[10px] sm:text-xs font-black uppercase tracking-wider mb-1">
                         VERIFIED VIP MERCHANT
                     </div>
                     <h3 class="font-display font-black text-2xl sm:text-3xl text-brand-dark tracking-tight leading-tight">
@@ -512,19 +599,19 @@
                         <ul class="space-y-3 text-sm sm:text-base font-semibold text-gray-800">
                             <li class="flex items-start gap-2.5">
                                 <i class="fas fa-check-circle text-brand-green text-base mt-0.5"></i>
-                                <span>ตัวละครเลเวล 60+ (พร้อมลุยแมพ Endgame ทันที)</span>
+                                <span>ตัวละครเลเวล 60+ </span>
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i class="fas fa-check-circle text-brand-green text-base mt-0.5"></i>
-                                <span>ปลดล็อคพลังวิญญาณ (Spirit) 100 ครบถ้วน</span>
+                                <span>พลังวิญญาณ (Spirit) 100 </span>
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i class="fas fa-check-circle text-brand-green text-base mt-0.5"></i>
-                                <span>เคลียร์ครบทุกเควสเนื้อเรื่อง Act 1 - Endgame</span>
+                                <span>เคลียร์ครบทุกเควสเนื้อเรื่อง</span>
                             </li>
                             <li class="flex items-start gap-2.5 text-gray-600">
                                 <i class="far fa-clock text-base mt-0.5"></i>
-                                <span>ระยะเวลาดำเนินการ: 3 - 5 ชั่วโมง (วิ่งมือ 100%)</span>
+                                <span>ระยะเวลาดำเนินการ: 3 - 5 ชั่วโมง </span>
                             </li>
                         </ul>
                     </div>
@@ -538,7 +625,7 @@
                             <div class="bg-brand-canvas p-4 sm:p-5 rounded-xl border-2 border-brand-dark flex flex-col justify-between gap-3.5 shadow-nb-sm">
                                 <div>
                                     <span class="font-black text-base sm:text-lg text-brand-dark block">🚶 แบบเดินตาม (Follow)</span>
-                                    <span class="text-xs sm:text-sm text-gray-600 font-medium block mt-1">เข้าตี้เดินตามเก็บของ สบายๆ</span>
+                                    
                                     <div class="text-xl sm:text-2xl font-black text-brand-dark mt-2">590 ฿</div>
                                 </div>
                                 <button onclick="addServiceToCalc('Act 1 - Endgame (เดินตาม)', 590)" class="nb-btn bg-brand-green text-brand-dark font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
@@ -548,8 +635,8 @@
                             </div>
                             <div class="bg-brand-canvas p-4 sm:p-5 rounded-xl border-2 border-brand-dark flex flex-col justify-between gap-3.5 shadow-nb-sm">
                                 <div>
-                                    <span class="font-black text-base sm:text-lg text-brand-dark block">🔑 แบบฝากไอดี (Pilot)</span>
-                                    <span class="text-xs sm:text-sm text-gray-600 font-medium block mt-1">วิ่งมือให้จนจบเควส ปลอดภัย 100%</span>
+                                    <span class="font-black text-base sm:text-lg text-brand-dark block">🔑 แบบฝากไอดี (Steam)</span>
+                                    
                                     <div class="text-xl sm:text-2xl font-black text-brand-dark mt-2">890 ฿</div>
                                 </div>
                                 <button onclick="addServiceToCalc('Act 1 - Endgame (ฝากไอดี)', 890)" class="nb-btn bg-brand-coral text-white font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
@@ -574,7 +661,7 @@
                             <div class="bg-brand-canvas p-4 sm:p-5 rounded-xl border-2 border-brand-dark flex flex-col justify-between gap-3.5 shadow-nb-sm">
                                 <div>
                                     <span class="text-base sm:text-lg font-black text-brand-dark block">🚶 แบบปกติ (~20 นาที)</span>
-                                    <span class="text-xs sm:text-sm text-gray-600 font-medium block mt-1">วิ่งเก็บแต้มตามเส้นทางมาตรฐาน</span>
+                                    
                                     <div class="text-xl sm:text-2xl font-black text-brand-dark mt-2">20 ฿</div>
                                 </div>
                                 <button onclick="addServiceToCalc('ปลดแต้ม 1-8 (แบบปกติ)', 20)" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
@@ -584,8 +671,8 @@
                             </div>
                             <div class="bg-brand-canvas p-4 sm:p-5 rounded-xl border-2 border-brand-dark flex flex-col justify-between gap-3.5 shadow-nb-sm">
                                 <div>
-                                    <span class="text-base sm:text-lg font-black text-brand-blue block">⚡ แบบด่วนพิเศษ (5 นาที)</span>
-                                    <span class="text-xs sm:text-sm text-gray-600 font-medium block mt-1">จบไวทันใจ ประหยัดเวลาทันที</span>
+                                    <span class="text-base sm:text-lg font-black text-brand-blue block">⚡ แบบด่วนพิเศษ (5-10 นาที)</span>
+                                    
                                     <div class="text-xl sm:text-2xl font-black text-brand-blue mt-2">40 ฿</div>
                                 </div>
                                 <button onclick="addServiceToCalc('ปลดแต้ม 1-8 (แบบด่วน 5 นาที)', 40)" class="nb-btn bg-brand-blue text-white font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
@@ -598,7 +685,7 @@
 
                     <div class="bg-amber-100 border-2 border-amber-500 p-4 sm:p-5 rounded-2xl text-xs sm:text-sm font-semibold text-amber-950 flex items-start gap-3">
                         <i class="fas fa-triangle-exclamation text-amber-600 text-lg mt-0.5 flex-shrink-0"></i>
-                        <p class="leading-relaxed"><b class="font-black text-amber-900">เงื่อนไขสำคัญ:</b> ตัวละครต้องผ่าน Act 2 และทำเควส <span class="font-black underline">"ทางผ่านผู้ทรยศ"</span> เรียบร้อยแล้ว จึงจะลงแต้มที่ 8 ได้ครับ</p>
+                        <p class="leading-relaxed"><b class="font-black text-amber-900">เงื่อนไขสำคัญ:</b> ตัวละครต้องอยู่ Act 2 และทำเควส <span class="font-black underline">"ทางผ่านผู้ทรยศ"</span> เรียบร้อยแล้ว จึงจะลงแต้ม 8 ได้</p>
                     </div>
                 </div>`,
 
@@ -625,11 +712,11 @@
                     </div>
 
                     <div class="bg-brand-surfaceAlt p-6 sm:p-7 border-2 border-brand-dark rounded-2xl text-center shadow-nb-sm">
-                        <span class="text-xs sm:text-sm font-black text-gray-600 uppercase tracking-wider">ค่าบริการจัดบิ้วเริ่มต้น</span>
+                        <span class="text-xs sm:text-sm font-black text-gray-600 uppercase tracking-wider">ค่าบริการ</span>
                         <div class="font-display text-4xl sm:text-5xl font-black text-brand-dark my-2">
                             300 <span class="text-base sm:text-lg font-bold">บาท</span>
                         </div>
-                        <p class="text-xs sm:text-sm text-gray-600 mb-5 font-medium">*ประเมินตามความซับซ้อนของบิ้ว อุปกรณ์ และงบประมาณของคุณ</p>
+                        
                         <button onclick="addServiceToCalc('จัดบิ้ว/แก้บิ้ว (เริ่มต้น)', 300)" class="nb-btn bg-brand-coral text-white font-black text-sm sm:text-base py-3 px-6 rounded-xl inline-flex items-center gap-2 shadow-nb-sm">
                             <i class="fas fa-cart-plus text-base"></i>
                             <span>+ ใส่ตะกร้าคำนวณ (300 ฿)</span>
@@ -691,7 +778,7 @@
                                 <div class="bg-brand-canvas p-2.5 rounded-xl border-2 border-brand-dark flex justify-between items-center shadow-nb-sm">
                                     <div>
                                         <span class="font-black text-xs sm:text-sm text-brand-dark block">เหมาครบ 336 แต้ม</span>
-                                        <p class="text-[11px] text-gray-500 font-normal">จบครบทุกแต้มบอร์ด</p>
+                                        
                                         <div class="text-sm sm:text-base font-black text-brand-purple mt-0.5">500 ฿</div>
                                     </div>
                                     <button onclick="addServiceToCalc('เหมา Atlas 336 แต้ม', 500)" class="nb-btn bg-brand-purple text-white font-bold text-xs py-2 px-3 rounded-lg flex items-center gap-1">
@@ -712,13 +799,13 @@
                     </div>
                 </div>`,
 
-            detailTitle5: `05. ฟาร์มทองด่วน (Gold Farming)`,
+            detailTitle5: `05. ฟาร์มทอง (Gold Farming)`,
             detailBg5: 'bg-brand-yellow text-brand-dark',
             detailContent5: `
                 <div class="space-y-5 text-brand-dark">
                     <div class="bg-brand-surfaceAlt p-5 sm:p-6 rounded-2xl border-2 border-brand-dark text-center">
                         <h4 class="font-black text-base sm:text-lg mb-1.5 text-brand-dark">ฟาร์มทองด่วน ปลอดภัย 100%</h4>
-                        <p class="text-xs sm:text-sm text-gray-700 font-medium">ได้ทองไปอัพเมืองหรือรีคราฟทันที ไม่ต้องเสียเวลาฟาร์มเอง</p>
+                        
                     </div>
 
                     <div class="grid grid-cols-2 gap-3.5 text-center">
@@ -728,7 +815,7 @@
                         </div>
                         <div class="bg-brand-surfaceAlt p-4 sm:p-5 rounded-2xl border-2 border-brand-dark shadow-nb-sm">
                             <span class="text-xs sm:text-sm text-gray-600 font-bold block mb-1">เวลาที่ใช้ดำเนินการ</span>
-                            <span class="font-display font-black text-2xl sm:text-3xl text-brand-dark">&lt; 5 นาที</span>
+                            <span class="font-display font-black text-2xl sm:text-3xl text-brand-dark">&lt; 10 นาที</span>
                         </div>
                     </div>
 
@@ -739,10 +826,10 @@
                         </div>
                         <div class="mt-4 flex flex-wrap justify-center gap-3">
                             <button onclick="addServiceToCalc('ฟาร์มทอง 2-3 ล้าน (1 รอบ)', 40)" class="nb-btn bg-brand-yellow text-brand-dark font-black text-xs sm:text-sm py-3 px-5 rounded-xl flex items-center gap-2">
-                                <i class="fas fa-cart-plus text-base"></i> + 1 รอบ (40฿)
+                                <i class="fas fa-cart-plus text-base"></i> + 1 รอบ
                             </button>
                             <button onclick="addServiceToCalc('ฟาร์มทอง 10-15 ล้าน (5 รอบ)', 200)" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-black text-xs sm:text-sm py-3 px-5 rounded-xl flex items-center gap-2">
-                                <i class="fas fa-cart-plus text-base"></i> + 5 รอบ (200฿)
+                                <i class="fas fa-cart-plus text-base"></i> + 5 รอบ 
                             </button>
                         </div>
                     </div>
@@ -823,9 +910,10 @@
             
             if (cart.length === 0) {
                 listEl.innerHTML = `
-                    <div class="text-center py-6 text-gray-500 font-medium text-xs">
-                        ยังไม่มีรายการที่เลือก<br>
-                        <span class="text-[11px] text-gray-400">กดปุ่ม "+ ตะกร้า" ที่การ์ดด้านบนเพื่อคำนวณ</span>
+                  <div id="cartItemsList" class="space-y-2 max-h-56 overflow-y-auto pr-1">
+                        <div class="flex flex-col items-center justify-center min-h-[14rem] text-center text-gray-500 font-medium text-base">
+                            ยังไม่มีรายการที่เลือก<br>
+                            <span class="text-[14px] text-gray-500">กดปุ่ม "+ ตะกร้า" ที่รายการด้านบนเพื่อคำนวณ</span>
                     </div>`;
                 totalDisplay.innerText = '0';
                 return;
@@ -859,15 +947,15 @@
             }
 
             let total = 0;
-            let text = "🎮 สั่งซื้อบริการ Poe2 🎮\n";
-            text += "-------------------------------\n";
+            let text = "🎮 สั่งซื้อบริการ Path of Exile 2 (พ่อค้า VIP-5050)\n";
+            text += "--------------------------------------\n";
             cart.forEach((item, index) => {
                 total += item.price;
                 text += `${index + 1}. ${item.name} (${item.price} บาท)\n`;
             });
-            text += "-------------------------------\n";
+            text += "--------------------------------------\n";
             text += `💰 ยอดรวมทั้งสิ้น: ${total.toLocaleString()} บาท\n`;
-            text += "⌛รอพ่อค้าส่ง QR Code สักครู่";
+            text += "รอพ่อค้าส่ง QR Code สักครู่";
 
             copyTextToClipboard(text);
             showToast('คัดลอกสรุปรายการแล้ว! วางในแชทได้เลย 📋');
