@@ -947,7 +947,7 @@
             }
 
             let total = 0;
-            let text = "🎮 สั่งซื้อบริการ Path of Exile 2 (พ่อค้า VIP-5050)\n";
+            let text = "🎮 สั่งซื้อบริการ POE2 🎮\n";
             text += "--------------------------------------\n";
             cart.forEach((item, index) => {
                 total += item.price;
@@ -955,7 +955,7 @@
             });
             text += "--------------------------------------\n";
             text += `💰 ยอดรวมทั้งสิ้น: ${total.toLocaleString()} บาท\n`;
-            text += "รอพ่อค้าส่ง QR Code สักครู่";
+            text += "⌛ รอพ่อค้าส่ง QR Code สักครู่";
 
             copyTextToClipboard(text);
             showToast('คัดลอกรายการแล้ว! กำลังเปิดหน้าแชท... 🚀');
