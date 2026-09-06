@@ -62,7 +62,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Clean Neubrutalist Cards & Buttons */
         .nb-card {
             background: #F5EFE6;
             border: 2.5px solid #18191F;
@@ -93,7 +92,6 @@
             box-shadow: 1px 1px 0px #18191F;
         }
 
-        /* Clean Scrollbars */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #FAF5EA; }
         ::-webkit-scrollbar-thumb { background: #18191F; border-radius: 4px; }
@@ -102,41 +100,36 @@
             background-color: rgba(24, 25, 31, 0.7);
             backdrop-filter: blur(4px);
         }
+
+        @keyframes hud-float-gentle {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-7px) rotate(1deg); }
+        }
+        @keyframes hud-float-alt {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(7px) rotate(-1.5deg); }
+        }
+        @keyframes hud-liquid-wave {
+            0%, 100% { transform: scaleY(1) translateY(0); }
+            50% { transform: scaleY(1.06) translateY(-3px); }
+        }
+        .hud-anim-float { animation: hud-float-gentle 4s ease-in-out infinite; }
+        .hud-anim-float-alt { animation: hud-float-alt 3.5s ease-in-out infinite; }
+        .hud-anim-wave { animation: hud-liquid-wave 2.8s ease-in-out infinite; }
     </style>
 </head>
 <body class="selection:bg-brand-yellow selection:text-brand-dark min-h-screen flex flex-col justify-between">
 
-<!-- Style สำหรับควบคุม Animation -->
-<style>
-    @keyframes hud-float-gentle {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-7px) rotate(1deg); }
-    }
-    @keyframes hud-float-alt {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(7px) rotate(-1.5deg); }
-    }
-    @keyframes hud-liquid-wave {
-        0%, 100% { transform: scaleY(1) translateY(0); }
-        50% { transform: scaleY(1.06) translateY(-3px); }
-    }
-    .hud-anim-float { animation: hud-float-gentle 4s ease-in-out infinite; }
-    .hud-anim-float-alt { animation: hud-float-alt 3.5s ease-in-out infinite; }
-    .hud-anim-wave { animation: hud-liquid-wave 2.8s ease-in-out infinite; }
-</style>
-
 <!-- Hero Section -->
 <section class="max-w-6xl mx-auto px-4 pt-8 sm:pt-10 pb-6 w-full">
     <div class="bg-brand-surface border-[2.5px] border-brand-dark rounded-3xl p-6 sm:p-10 shadow-nb-lg relative overflow-hidden">
-        
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <!-- Left Side -->
             <div class="lg:col-span-7 z-10">
-                <!-- Verified Badge -->
                 <div class="inline-flex items-center gap-2 bg-brand-grayBg px-3.5 py-1.5 rounded-full border-2 border-brand-dark shadow-nb-sm mb-5 text-xs font-bold text-brand-dark">
-                    <span class="w-2.5 h-2.5 rounded-full bg-brand-green border border-brand-dark"></span>
-                    <span>STATUS : ONLINE</span>
+                    <span id="statusIndicator" class="w-2.5 h-2.5 rounded-full bg-brand-green border border-brand-dark"></span>
+                    <span id="statusText">STATUS : ONLINE</span>
                 </div>
 
                 <h1 class="text-3xl sm:text-5xl font-black text-brand-dark leading-tight tracking-tight mb-4">
@@ -150,7 +143,6 @@
                     ครบจบทุกคอนเทนต์ การันตีผลงาน และ ความปลอดภัย วิ่งมือทุกออเดอร์ 100%
                 </p>
 
-                <!-- Clean CTA Buttons -->
                 <div class="flex flex-wrap items-center gap-3">
                     <a href="#services-list" class="nb-btn bg-brand-dark text-white font-bold text-sm sm:text-base px-5 py-3 rounded-xl flex items-center gap-2">
                         <span>ดูรายการบริการ</span>
@@ -160,7 +152,6 @@
                         <i class="fas fa-calculator"></i>
                         <span>CART</span>
                     </button>
-        
                     <button onclick="openDetailView('guide')" class="nb-btn bg-white hover:bg-brand-surfaceAlt text-brand-dark font-bold text-sm sm:text-base px-4 py-3 rounded-xl flex items-center gap-2">
                         <i class="fas fa-circle-info text-brand-blue"></i>
                         <span>วิธีใช้บริการ</span>
@@ -168,15 +159,11 @@
                 </div>
             </div>
 
-            <!-- Right Side: Life & Mana HUD + 4 Resistance Flasks -->
+            <!-- Right Side: Life & Mana HUD + Flasks -->
             <div class="lg:col-span-5 relative flex items-center justify-center min-h-[350px] select-none">
-                
-                <!-- Main HUD Card with Gentle Float Motion -->
                 <div class="hud-anim-float w-full max-w-[340px] bg-white border-[2.5px] border-brand-dark p-5 rounded-3xl shadow-nb-xl relative">
                     
-                    <!-- Globes Row -->
                     <div class="flex items-center justify-between relative z-10 mb-4">
-                        
                         <!-- Life Globe -->
                         <div class="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full border-[2.5px] border-brand-dark bg-red-100 overflow-hidden shadow-nb flex items-end justify-center">
                             <div class="w-full h-4/5 bg-gradient-to-t from-red-700 via-red-500 to-rose-400 rounded-b-full border-t-2 border-brand-dark/40 hud-anim-wave"></div>
@@ -205,26 +192,21 @@
 
                     <!-- 4 Elemental & Chaos Resistance Flasks Bar -->
                     <div class="bg-amber-50/80 border-2 border-brand-dark rounded-2xl p-2.5 shadow-nb-sm grid grid-cols-4 gap-2">
-                        <!-- Fire -->
                         <div class="h-14 rounded-xl bg-orange-500 border-2 border-brand-dark shadow-nb-sm flex items-center justify-center text-white text-lg">
                             <i class="fas fa-fire"></i>
                         </div>
-                        <!-- Cold -->
                         <div class="h-14 rounded-xl bg-cyan-400 border-2 border-brand-dark shadow-nb-sm flex items-center justify-center text-white text-lg">
                             <i class="fas fa-snowflake"></i>
                         </div>
-                        <!-- Lightning -->
                         <div class="h-14 rounded-xl bg-brand-yellow border-2 border-brand-dark shadow-nb-sm flex items-center justify-center text-brand-dark text-lg">
                             <i class="fas fa-bolt"></i>
                         </div>
-                        <!-- Chaos -->
                         <div class="h-14 rounded-xl bg-purple-600 border-2 border-brand-dark shadow-nb-sm flex items-center justify-center text-white text-lg">
                             <i class="fas fa-biohazard"></i>
                         </div>
                     </div>
                 </div>
 
-                <!-- Floating Star Badge -->
                 <div class="hud-anim-float-alt absolute -top-3 -right-2 bg-brand-yellow border-2 border-brand-dark p-2 rounded-xl shadow-nb rotate-12 text-brand-dark">
                     <i class="fas fa-sparkles"></i>
                 </div>
@@ -447,7 +429,7 @@
                             <span class="font-bold text-sm text-gray-600">บาท</span>
                         </div>
                         <p class="text-[13px] font-semibold text-gray-600 leading-relaxed">
-                            *ยอดสุทธิ สามารถกดคัดลอกสรุปรายการแล้วส่งไปใน Facebook Messenger ได้เลยครับ
+                            *ยอดสุทธิ สามารถกดส่ง Order เพื่อเปิด Facebook Messenger พร้อมคัดลอกข้อความสรุปได้ทันทีครับ
                         </p>
                     </div>
 
@@ -474,7 +456,6 @@
     <footer class="max-w-6xl mx-auto px-4 pt-4 pb-12 w-full mt-4">
         <div class="bg-brand-yellow border-[2.5px] border-brand-dark rounded-3xl p-5 sm:p-7 shadow-nb-lg flex flex-col lg:flex-row items-center justify-between gap-6">
             
-            <!-- Left Info Block -->
             <div class="flex items-center gap-4 sm:gap-5 w-full lg:w-auto">
                 <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-brand-surface border-[2.5px] border-brand-dark shadow-nb-sm flex items-center justify-center flex-shrink-0 p-3">
                     <i class="fas fa-crown text-2xl sm:text-3xl text-brand-dark"></i>
@@ -493,16 +474,14 @@
                 </div>
             </div>
 
-            <!-- Right Action Buttons -->
             <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto justify-start lg:justify-end">
                 <a href="https://discord.gg/srjZhSYe7m" target="_blank" rel="noopener noreferrer" class="nb-btn bg-[#5865F2] text-white font-bold px-5 py-3 rounded-2xl text-xs sm:text-sm flex items-center gap-2">
                     <i class="fab fa-discord text-base"></i>
                     <span>Discord</span>
                 </a>
                 <a href="https://docs.google.com/spreadsheets/d/1O43FMUbWP5bVJTLMd7nfM8Jx1WFe9YHsylHF42LeMTM/edit?gid=650220014#gid=650220014" target="_blank" rel="noopener noreferrer" class="nb-btn bg-brand-green text-white font-bold text-sm sm:text-base px-4 py-3 rounded-xl flex items-center gap-2">
-                        <i class="fas fa-shield-halved text-white"></i>
-                        <span>ตรวจสอบรายชื่อพ่อค้า VIP</span>
-                    </a>
+                    <i class="fas fa-shield-halved text-white"></i>
+                    <span>ตรวจสอบรายชื่อพ่อค้า VIP</span>
                 </a>
             </div>
 
@@ -554,45 +533,61 @@
     </div>
 
     <script>
-        // Modal Data for Services & Guide
-        const siteData = {
-            detailTitleguide: `📖 วิธีการสั่งซื้อบริการ`,
-            detailBgguide: 'bg-brand-yellow text-brand-dark',
-            detailContentguide: `
+        // Google Apps Script Web App Endpoint
+        const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxPn1ZRwTmKQXZHOY7lKagryWoXGuPm4AxXQewS4x-nDvfqb1XoXwbaXel3kbeBxLM7eA/exec";
+
+        // Default Prices & Services (Fallback Data)
+        let priceData = {
+            act_follow: { name: 'Act 1 - Endgame (เดินตาม)', price: 590 },
+            act_pilot: { name: 'Act 1 - Endgame (ฝากไอดี)', price: 890 },
+            passives_normal: { name: 'ปลดแต้ม 1-8 (แบบปกติ)', price: 20 },
+            passives_fast: { name: 'ปลดแต้ม 1-8 (แบบด่วน 5 นาที)', price: 40 },
+            build_setup: { name: 'จัดบิ้ว/แก้บิ้ว (เริ่มต้น)', price: 300 },
+            level_60_84: { name: 'พาเวล 60 - 84', price: 200 },
+            level_84_90: { name: 'พาเวล 84 - 90', price: 200 },
+            level_60_90: { name: 'เหมาพาเวล 60-90', price: 300 },
+            atlas_all: { name: 'เหมา Atlas 336 แต้ม', price: 500 },
+            atlas_single: { name: 'Atlas แยกตาม Content (1 สาย)', price: 200 },
+            gold_1: { name: 'ฟาร์มทอง 2-3 ล้าน (1 รอบ)', price: 40 },
+            gold_5: { name: 'ฟาร์มทอง 10-15 ล้าน (5 รอบ)', price: 200 }
+        };
+
+        const siteData = {};
+
+        // Generate Modal Contents with current prices
+        function buildSiteData() {
+            siteData.detailTitleguide = `📖 วิธีการสั่งซื้อบริการ`;
+            siteData.detailBgguide = 'bg-brand-yellow text-brand-dark';
+            siteData.detailContentguide = `
                 <div class="space-y-3.5 text-brand-dark">
                     <p class="text-sm font-semibold text-gray-700 mb-2">ทำตามขั้นตอนง่ายๆ เพื่อสั่งซื้อบริการได้ทันทีครับ:</p>
-                    
                     <div class="grid grid-cols-1 gap-2.5">
                         <div class="flex items-center gap-3.5 bg-brand-surfaceAlt p-3.5 rounded-2xl border-2 border-brand-dark shadow-nb-sm">
                             <span class="w-8 h-8 rounded-xl bg-brand-yellow border-2 border-brand-dark flex items-center justify-center font-black text-sm flex-shrink-0">1</span>
                             <span class="font-bold text-sm sm:text-base">เลือกบริการที่ต้องการ</span>
                         </div>
-
                         <div class="flex items-center gap-3.5 bg-brand-surfaceAlt p-3.5 rounded-2xl border-2 border-brand-dark shadow-nb-sm">
                             <span class="w-8 h-8 rounded-xl bg-brand-green border-2 border-brand-dark flex items-center justify-center font-black text-sm flex-shrink-0">2</span>
                             <span class="font-bold text-sm sm:text-base">กดเพิ่มตะกร้า <span class="text-xs text-gray-600 font-semibold">(เลือกได้มากกว่า 1 บริการ)</span></span>
                         </div>
-
                         <div class="flex items-center gap-3.5 bg-brand-surfaceAlt p-3.5 rounded-2xl border-2 border-brand-dark shadow-nb-sm">
                             <span class="w-8 h-8 rounded-xl bg-brand-blue text-white border-2 border-brand-dark flex items-center justify-center font-black text-sm flex-shrink-0">3</span>
                             <span class="font-bold text-sm sm:text-base">กด <span class="text-brand-dark font-black">"ไปยังตะกร้า"</span></span>
                         </div>
-
                         <div class="flex items-center gap-3.5 bg-brand-surfaceAlt p-3.5 rounded-2xl border-2 border-brand-dark shadow-nb-sm">
                             <span class="w-8 h-8 rounded-xl bg-brand-yellow border-2 border-brand-dark flex items-center justify-center font-black text-sm flex-shrink-0">4</span>
                             <span class="font-bold text-sm sm:text-base">กด <span class="text-brand-dark font-black">"ส่ง order ให้พ่อค้า"</span> <span class="text-xs text-gray-600 font-semibold">(ระบบคัดลอกสรุปรายการให้อัตโนมัติและเปิดหน้าแชท)</span></span>
                         </div>
-
                         <div class="flex items-center gap-3.5 bg-brand-surfaceAlt p-3.5 rounded-2xl border-2 border-brand-dark shadow-nb-sm">
                             <span class="w-8 h-8 rounded-xl bg-brand-coral text-white border-2 border-brand-dark flex items-center justify-center font-black text-sm flex-shrink-0">5</span>
                             <span class="font-bold text-sm sm:text-base">กด <span class="bg-brand-canvas px-2 py-0.5 rounded border border-brand-dark font-mono font-black text-xs sm:text-sm">CTRL + V</span> (วาง) ในแชทพ่อค้าแล้วกดส่งได้ทันที</span>
                         </div>
                     </div>
-                </div>`,
+                </div>`;
 
-            detailTitle1: `01. วิ่ง Act 1 - Endgame`,
-            detailBg1: 'bg-brand-green text-brand-dark',
-            detailContent1: `
+            siteData.detailTitle1 = `01. วิ่ง Act 1 - Endgame`;
+            siteData.detailBg1 = 'bg-brand-green text-brand-dark';
+            siteData.detailContent1 = `
                 <div class="space-y-5 text-brand-dark">
                     <div class="bg-brand-surfaceAlt p-5 sm:p-6 rounded-2xl border-2 border-brand-dark">
                         <h4 class="font-black text-base sm:text-lg mb-3.5 text-brand-dark flex items-center gap-2">
@@ -628,9 +623,9 @@
                             <div class="bg-brand-canvas p-4 sm:p-5 rounded-xl border-2 border-brand-dark flex flex-col justify-between gap-3.5 shadow-nb-sm">
                                 <div>
                                     <span class="font-black text-base sm:text-lg text-brand-dark block">🚶 แบบเดินตาม (Follow)</span>
-                                    <div class="text-xl sm:text-2xl font-black text-brand-dark mt-2">590 ฿</div>
+                                    <div class="text-xl sm:text-2xl font-black text-brand-dark mt-2">${priceData.act_follow.price} ฿</div>
                                 </div>
-                                <button onclick="addServiceToCalc('Act 1 - Endgame (เดินตาม)', 590)" class="nb-btn bg-brand-green text-brand-dark font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
+                                <button onclick="addServiceByKey('act_follow')" class="nb-btn bg-brand-green text-brand-dark font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
                                     <i class="fas fa-cart-plus text-base"></i>
                                     <span>+ ใส่ตะกร้า</span>
                                 </button>
@@ -638,20 +633,20 @@
                             <div class="bg-brand-canvas p-4 sm:p-5 rounded-xl border-2 border-brand-dark flex flex-col justify-between gap-3.5 shadow-nb-sm">
                                 <div>
                                     <span class="font-black text-base sm:text-lg text-brand-dark block">🔑 แบบฝากไอดี (Steam)</span>
-                                    <div class="text-xl sm:text-2xl font-black text-brand-dark mt-2">890 ฿</div>
+                                    <div class="text-xl sm:text-2xl font-black text-brand-dark mt-2">${priceData.act_pilot.price} ฿</div>
                                 </div>
-                                <button onclick="addServiceToCalc('Act 1 - Endgame (ฝากไอดี)', 890)" class="nb-btn bg-brand-coral text-white font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
+                                <button onclick="addServiceByKey('act_pilot')" class="nb-btn bg-brand-coral text-white font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
                                     <i class="fas fa-cart-plus text-base"></i>
                                     <span>+ ใส่ตะกร้า</span>
                                 </button>
                             </div>
                         </div>
                     </div>
-                </div>`,
+                </div>`;
 
-            detailTitle2: `02. ปลดแต้ม 1-8`,
-            detailBg2: 'bg-brand-blue text-white',
-            detailContent2: `
+            siteData.detailTitle2 = `02. ปลดแต้ม 1-8`;
+            siteData.detailBg2 = 'bg-brand-blue text-white';
+            siteData.detailContent2 = `
                 <div class="space-y-5 text-brand-dark">
                     <div class="bg-brand-surfaceAlt p-5 sm:p-6 rounded-2xl border-2 border-brand-dark">
                         <h4 class="font-black text-base sm:text-lg mb-3.5 flex items-center gap-2">
@@ -662,9 +657,9 @@
                             <div class="bg-brand-canvas p-4 sm:p-5 rounded-xl border-2 border-brand-dark flex flex-col justify-between gap-3.5 shadow-nb-sm">
                                 <div>
                                     <span class="text-base sm:text-lg font-black text-brand-dark block">🚶 แบบปกติ (~20 นาที)</span>
-                                    <div class="text-xl sm:text-2xl font-black text-brand-dark mt-2">20 ฿</div>
+                                    <div class="text-xl sm:text-2xl font-black text-brand-dark mt-2">${priceData.passives_normal.price} ฿</div>
                                 </div>
-                                <button onclick="addServiceToCalc('ปลดแต้ม 1-8 (แบบปกติ)', 20)" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
+                                <button onclick="addServiceByKey('passives_normal')" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
                                     <i class="fas fa-cart-plus text-base"></i>
                                     <span>+ ใส่ตะกร้า</span>
                                 </button>
@@ -672,9 +667,9 @@
                             <div class="bg-brand-canvas p-4 sm:p-5 rounded-xl border-2 border-brand-dark flex flex-col justify-between gap-3.5 shadow-nb-sm">
                                 <div>
                                     <span class="text-base sm:text-lg font-black text-brand-blue block">⚡ แบบด่วนพิเศษ (5-10 นาที)</span>
-                                    <div class="text-xl sm:text-2xl font-black text-brand-blue mt-2">40 ฿</div>
+                                    <div class="text-xl sm:text-2xl font-black text-brand-blue mt-2">${priceData.passives_fast.price} ฿</div>
                                 </div>
-                                <button onclick="addServiceToCalc('ปลดแต้ม 1-8 (แบบด่วน 5 นาที)', 40)" class="nb-btn bg-brand-blue text-white font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
+                                <button onclick="addServiceByKey('passives_fast')" class="nb-btn bg-brand-blue text-white font-black text-sm py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 w-full">
                                     <i class="fas fa-cart-plus text-base"></i>
                                     <span>+ ใส่ตะกร้า</span>
                                 </button>
@@ -686,11 +681,11 @@
                         <i class="fas fa-triangle-exclamation text-amber-600 text-lg mt-0.5 flex-shrink-0"></i>
                         <p class="leading-relaxed"><b class="font-black text-amber-900">เงื่อนไขสำคัญ:</b> ตัวละครต้องอยู่ Act 2 และทำเควส <span class="font-black underline">"ทางผ่านผู้ทรยศ"</span> เรียบร้อยแล้ว จึงจะลงแต้ม 8 ได้</p>
                     </div>
-                </div>`,
+                </div>`;
 
-            detailTitle3: `03. รับจัดบิ้ว & แก้บิ้วตามงบ`,
-            detailBg3: 'bg-brand-coral text-white',
-            detailContent3: `
+            siteData.detailTitle3 = `03. รับจัดบิ้ว & แก้บิ้วตามงบ`;
+            siteData.detailBg3 = 'bg-brand-coral text-white';
+            siteData.detailContent3 = `
                 <div class="space-y-5 text-brand-dark">
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                         <div class="bg-brand-surfaceAlt border-2 border-brand-dark p-4 rounded-2xl text-center shadow-nb-sm">
@@ -713,19 +708,19 @@
                     <div class="bg-brand-surfaceAlt p-6 sm:p-7 border-2 border-brand-dark rounded-2xl text-center shadow-nb-sm">
                         <span class="text-xs sm:text-sm font-black text-gray-600 uppercase tracking-wider">ค่าบริการ</span>
                         <div class="font-display text-4xl sm:text-5xl font-black text-brand-dark my-2">
-                            300 <span class="text-base sm:text-lg font-bold">บาท</span>
+                            ${priceData.build_setup.price} <span class="text-base sm:text-lg font-bold">บาท</span>
                         </div>
                         
-                        <button onclick="addServiceToCalc('จัดบิ้ว/แก้บิ้ว (เริ่มต้น)', 300)" class="nb-btn bg-brand-coral text-white font-black text-sm sm:text-base py-3 px-6 rounded-xl inline-flex items-center gap-2 shadow-nb-sm">
+                        <button onclick="addServiceByKey('build_setup')" class="nb-btn bg-brand-coral text-white font-black text-sm sm:text-base py-3 px-6 rounded-xl inline-flex items-center gap-2 shadow-nb-sm">
                             <i class="fas fa-cart-plus text-base"></i>
-                            <span>+ ใส่ตะกร้า (300 ฿)</span>
+                            <span>+ ใส่ตะกร้า (${priceData.build_setup.price} ฿)</span>
                         </button>
                     </div>
-                </div>`,
+                </div>`;
 
-            detailTitle4: `04. พาเวล 60-90 & แต้ม Atlas`,
-            detailBg4: 'bg-brand-purple text-white',
-            detailContent4: `
+            siteData.detailTitle4 = `04. พาเวล 60-90 & แต้ม Atlas`;
+            siteData.detailBg4 = 'bg-brand-purple text-white';
+            siteData.detailContent4 = `
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-brand-dark">
                     <!-- Section: Leveling -->
                     <div class="bg-brand-surfaceAlt p-3.5 sm:p-4 rounded-2xl border-2 border-brand-dark flex flex-col justify-between">
@@ -738,27 +733,27 @@
                                 <div class="flex justify-between items-center bg-brand-canvas p-2.5 rounded-xl border border-brand-dark/20">
                                     <div>
                                         <span class="text-brand-dark font-black">เลเวล 60 - 84</span>
-                                        <div class="font-black text-brand-purple text-sm">200 ฿</div>
+                                        <div class="font-black text-brand-purple text-sm">${priceData.level_60_84.price} ฿</div>
                                     </div>
-                                    <button onclick="addServiceToCalc('พาเวล 60 - 84', 200)" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-bold text-xs py-1.5 px-3 rounded-lg flex items-center gap-1">
+                                    <button onclick="addServiceByKey('level_60_84')" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-bold text-xs py-1.5 px-3 rounded-lg flex items-center gap-1">
                                         <i class="fas fa-cart-plus"></i> + ตะกร้า
                                     </button>
                                 </div>
                                 <div class="flex justify-between items-center bg-brand-canvas p-2.5 rounded-xl border border-brand-dark/20">
                                     <div>
                                         <span class="text-brand-dark font-black">เลเวล 84 - 90</span>
-                                        <div class="font-black text-brand-purple text-sm">200 ฿</div>
+                                        <div class="font-black text-brand-purple text-sm">${priceData.level_84_90.price} ฿</div>
                                     </div>
-                                    <button onclick="addServiceToCalc('พาเวล 84 - 90', 200)" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-bold text-xs py-1.5 px-3 rounded-lg flex items-center gap-1">
+                                    <button onclick="addServiceByKey('level_84_90')" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-bold text-xs py-1.5 px-3 rounded-lg flex items-center gap-1">
                                         <i class="fas fa-cart-plus"></i> + ตะกร้า
                                     </button>
                                 </div>
                                 <div class="flex justify-between items-center bg-brand-yellow p-2.5 rounded-xl border-2 border-brand-dark shadow-nb-sm">
                                     <div>
                                         <span class="font-black text-brand-dark text-xs sm:text-sm">🔥 เหมา 60 - 90</span>
-                                        <div class="font-black text-brand-dark text-sm sm:text-base">300 ฿</div>
+                                        <div class="font-black text-brand-dark text-sm sm:text-base">${priceData.level_60_90.price} ฿</div>
                                     </div>
-                                    <button onclick="addServiceToCalc('เหมาพาเวล 60-90', 300)" class="nb-btn bg-brand-dark text-white font-bold text-xs py-1.5 px-3 rounded-lg flex items-center gap-1">
+                                    <button onclick="addServiceByKey('level_60_90')" class="nb-btn bg-brand-dark text-white font-bold text-xs py-1.5 px-3 rounded-lg flex items-center gap-1">
                                         <i class="fas fa-cart-plus"></i> + ตะกร้า
                                     </button>
                                 </div>
@@ -777,29 +772,29 @@
                                 <div class="bg-brand-canvas p-2.5 rounded-xl border-2 border-brand-dark flex justify-between items-center shadow-nb-sm">
                                     <div>
                                         <span class="font-black text-xs sm:text-sm text-brand-dark block">เหมาครบ 336 แต้ม</span>
-                                        <div class="text-sm sm:text-base font-black text-brand-purple mt-0.5">500 ฿</div>
+                                        <div class="text-sm sm:text-base font-black text-brand-purple mt-0.5">${priceData.atlas_all.price} ฿</div>
                                     </div>
-                                    <button onclick="addServiceToCalc('เหมา Atlas 336 แต้ม', 500)" class="nb-btn bg-brand-purple text-white font-bold text-xs py-2 px-3 rounded-lg flex items-center gap-1">
+                                    <button onclick="addServiceByKey('atlas_all')" class="nb-btn bg-brand-purple text-white font-bold text-xs py-2 px-3 rounded-lg flex items-center gap-1">
                                         <i class="fas fa-cart-plus"></i> + ตะกร้า
                                     </button>
                                 </div>
                                 <div class="bg-brand-canvas p-2.5 rounded-xl border border-brand-dark/20 flex justify-between items-center">
                                     <div>
                                         <span class="font-black text-xs sm:text-sm text-brand-dark">แยก Content</span>
-                                        <div class="font-black text-brand-dark text-xs sm:text-sm">สายละ 200 ฿</div>
+                                        <div class="font-black text-brand-dark text-xs sm:text-sm">สายละ ${priceData.atlas_single.price} ฿</div>
                                     </div>
-                                    <button onclick="addServiceToCalc('Atlas แยกตาม Content (1 สาย)', 200)" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-bold text-xs py-1.5 px-3 rounded-lg flex items-center gap-1">
+                                    <button onclick="addServiceByKey('atlas_single')" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-bold text-xs py-1.5 px-3 rounded-lg flex items-center gap-1">
                                         <i class="fas fa-cart-plus"></i> + ตะกร้า
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>`,
+                </div>`;
 
-            detailTitle5: `05. ฟาร์มทอง (Gold Farming)`,
-            detailBg5: 'bg-brand-yellow text-brand-dark',
-            detailContent5: `
+            siteData.detailTitle5 = `05. ฟาร์มทอง (Gold Farming)`;
+            siteData.detailBg5 = 'bg-brand-yellow text-brand-dark';
+            siteData.detailContent5 = `
                 <div class="space-y-5 text-brand-dark">
                     <div class="bg-brand-surfaceAlt p-5 sm:p-6 rounded-2xl border-2 border-brand-dark text-center">
                         <h4 class="font-black text-base sm:text-lg mb-1.5 text-brand-dark">ฟาร์มทองด่วน ปลอดภัย 100%</h4>
@@ -819,22 +814,71 @@
                     <div class="bg-brand-canvas border-2 border-brand-dark p-5 sm:p-6 rounded-2xl text-center shadow-nb-sm">
                         <span class="text-xs sm:text-sm font-bold text-gray-600 uppercase">ราคาต่อ 1 รอบ</span>
                         <div class="font-display text-4xl sm:text-5xl font-black text-brand-dark my-2">
-                            40 <span class="text-base sm:text-lg font-bold">บาท</span>
+                            ${priceData.gold_1.price} <span class="text-base sm:text-lg font-bold">บาท</span>
                         </div>
                         <div class="mt-4 flex flex-wrap justify-center gap-3">
-                            <button onclick="addServiceToCalc('ฟาร์มทอง 2-3 ล้าน (1 รอบ)', 40)" class="nb-btn bg-brand-yellow text-brand-dark font-black text-xs sm:text-sm py-3 px-5 rounded-xl flex items-center gap-2">
+                            <button onclick="addServiceByKey('gold_1')" class="nb-btn bg-brand-yellow text-brand-dark font-black text-xs sm:text-sm py-3 px-5 rounded-xl flex items-center gap-2">
                                 <i class="fas fa-cart-plus text-base"></i> + 1 รอบ
                             </button>
-                            <button onclick="addServiceToCalc('ฟาร์มทอง 10-15 ล้าน (5 รอบ)', 200)" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-black text-xs sm:text-sm py-3 px-5 rounded-xl flex items-center gap-2">
+                            <button onclick="addServiceByKey('gold_5')" class="nb-btn bg-brand-surfaceAlt text-brand-dark font-black text-xs sm:text-sm py-3 px-5 rounded-xl flex items-center gap-2">
                                 <i class="fas fa-cart-plus text-base"></i> + 5 รอบ 
                             </button>
                         </div>
                     </div>
-                </div>`
-        };
+                </div>`;
+        }
+
+        // Initialize with default fallback first
+        buildSiteData();
+
+        // Fetch Live Prices from Google Apps Script Web App
+        async function fetchPricesFromSheet() {
+            try {
+                const response = await fetch(GOOGLE_SHEET_API_URL);
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Merge live data from Google Sheets into local priceData
+                    for (const key in data) {
+                        if (priceData[key]) {
+                            if (data[key].price !== undefined && data[key].price !== null && data[key].price !== '') {
+                                priceData[key].price = Number(data[key].price);
+                            }
+                            if (data[key].name) {
+                                priceData[key].name = data[key].name;
+                            }
+                        } else {
+                            priceData[key] = {
+                                name: data[key].name || key,
+                                price: Number(data[key].price) || 0
+                            };
+                        }
+                    }
+
+                    // Rebuild HTML templates with fresh prices
+                    buildSiteData();
+                    
+                    // If a modal is currently open, refresh its content immediately
+                    const modal = document.getElementById('detailModal');
+                    if (!modal.classList.contains('hidden') && currentOpenModalId !== null) {
+                        document.getElementById('detailContent-display').innerHTML = siteData[`detailContent${currentOpenModalId}`];
+                    }
+
+                    console.log("✅ ข้อมูลราคาอัปเดตตรงจาก Google Sheets สำเร็จ:", priceData);
+                }
+            } catch (err) {
+                console.warn("⚠️ ไม่สามารถโหลดราคาจาก Google Sheets ได้ (กำลังใช้ราคาสำรองเริ่มต้น):", err);
+            }
+        }
+
+        // Run fetch when DOM is ready
+        window.addEventListener('DOMContentLoaded', fetchPricesFromSheet);
 
         // Modal Handlers
+        let currentOpenModalId = null;
+
         function openDetailView(id) {
+            currentOpenModalId = id;
             const headerBg = document.getElementById('modalHeaderBg');
             headerBg.className = `p-5 border-b-3 border-brand-dark flex items-center justify-between ${siteData[`detailBg${id}`]}`;
             
@@ -854,6 +898,7 @@
         }
 
         function closeDetailView() {
+            currentOpenModalId = null;
             const modal = document.getElementById('detailModal');
             const modalContent = document.getElementById('detailModalContent');
             
@@ -881,8 +926,15 @@
         // Cart & Calculator Logic
         let cart = [];
 
+        function addServiceByKey(key) {
+            const item = priceData[key];
+            if (item) {
+                addServiceToCalc(item.name, item.price);
+            }
+        }
+
         function addServiceToCalc(name, price) {
-            cart.push({ id: Date.now() + Math.random(), name, price });
+            cart.push({ id: Date.now() + Math.random(), name, price: Number(price) });
             updateCartUI();
             showToast(`เพิ่ม "${name}" ลงตะกร้าแล้ว 🛒`);
         }
@@ -924,7 +976,7 @@
                 div.innerHTML = `
                     <span class="truncate max-w-[170px] sm:max-w-[200px] text-brand-dark">• ${item.name}</span>
                     <div class="flex items-center gap-2">
-                        <span class="font-bold text-brand-dark">${item.price} ฿</span>
+                        <span class="font-bold text-brand-dark">${item.price.toLocaleString()} ฿</span>
                         <button onclick="removeCartItem(${item.id})" class="text-brand-coral hover:text-red-700 p-1" title="ลบ">
                             <i class="fas fa-trash-alt text-xs"></i>
                         </button>
@@ -949,7 +1001,7 @@
             text += "---------------------------------\n";
             cart.forEach((item, index) => {
                 total += item.price;
-                text += `${index + 1}. ${item.name} (${item.price} บาท)\n`;
+                text += `${index + 1}. ${item.name} (${item.price.toLocaleString()} บาท)\n`;
             });
             text += "---------------------------------\n";
             text += `💰 ยอดรวมทั้งสิ้น: ${total.toLocaleString()} บาท\n`;
