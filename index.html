@@ -66,7 +66,7 @@
             background: #F5EFE6;
             border: 2.5px solid #18191F;
             box-shadow: 5px 5px 0px #18191F;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.2s ease, opacity 0.2s ease;
         }
 
         .nb-card:hover:not(.service-locked) {
@@ -74,13 +74,16 @@
             box-shadow: 8px 8px 0px #18191F;
         }
 
-        /* สไตล์สำหรับบริการที่ยังไม่เปิดให้บริการ */
+        /* รูปแบบการ์ดที่ยังไม่เปิดให้บริการ: สีจะจืดจาง โทนขาวดำ และไม่มีเมาส์ชี้ให้กด */
         .service-locked {
-            filter: grayscale(100%) contrast(85%);
-            opacity: 0.65;
+            filter: grayscale(100%) opacity(0.65) !important;
             cursor: not-allowed !important;
             box-shadow: 3px 3px 0px #18191F !important;
             transform: none !important;
+        }
+
+        .service-locked button {
+            pointer-events: none !important;
         }
 
         .nb-btn {
@@ -199,7 +202,7 @@
                         </div>
                     </div>
 
-                    <!-- 4 Resistance Flasks -->
+                    <!-- 4 Elemental & Chaos Resistance Flasks Bar -->
                     <div class="bg-amber-50/80 border-2 border-brand-dark rounded-2xl p-2.5 shadow-nb-sm grid grid-cols-4 gap-2">
                         <div class="h-14 rounded-xl bg-orange-500 border-2 border-brand-dark shadow-nb-sm flex items-center justify-center text-white text-lg">
                             <i class="fas fa-fire"></i>
@@ -244,8 +247,8 @@
 
             <!-- Card 1: Campaign Act 1-4 -->
             <div id="service-card-1" class="nb-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group cursor-pointer" onclick="handleCardClick(1)">
-                <!-- ป้ายแจ้งปิดบริการ (แสดงอัตโนมัติเมื่อปิด) -->
-                <div id="lock-overlay-1" class="hidden absolute inset-0 bg-brand-dark/25 backdrop-blur-[2px] z-20 flex flex-col items-center justify-center p-4">
+                <!-- Overlay สถานะปิดให้บริการ -->
+                <div id="lock-overlay-1" class="hidden absolute inset-0 bg-brand-dark/30 backdrop-blur-[1px] z-20 flex flex-col items-center justify-center p-4 select-none">
                     <div class="bg-brand-dark text-white px-4 py-2 rounded-xl border-2 border-white shadow-nb font-black text-xs sm:text-sm flex items-center gap-2">
                         <i class="fas fa-lock text-brand-coral"></i>
                         <span>ยังไม่เปิดให้บริการ</span>
@@ -281,7 +284,8 @@
 
             <!-- Card 2: Skill Points 1-8 -->
             <div id="service-card-2" class="nb-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group cursor-pointer" onclick="handleCardClick(2)">
-                <div id="lock-overlay-2" class="hidden absolute inset-0 bg-brand-dark/25 backdrop-blur-[2px] z-20 flex flex-col items-center justify-center p-4">
+                <!-- Overlay สถานะปิดให้บริการ -->
+                <div id="lock-overlay-2" class="hidden absolute inset-0 bg-brand-dark/30 backdrop-blur-[1px] z-20 flex flex-col items-center justify-center p-4 select-none">
                     <div class="bg-brand-dark text-white px-4 py-2 rounded-xl border-2 border-white shadow-nb font-black text-xs sm:text-sm flex items-center gap-2">
                         <i class="fas fa-lock text-brand-coral"></i>
                         <span>ยังไม่เปิดให้บริการ</span>
@@ -317,7 +321,8 @@
 
             <!-- Card 3: Custom Build Setup -->
             <div id="service-card-3" class="nb-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group cursor-pointer" onclick="handleCardClick(3)">
-                <div id="lock-overlay-3" class="hidden absolute inset-0 bg-brand-dark/25 backdrop-blur-[2px] z-20 flex flex-col items-center justify-center p-4">
+                <!-- Overlay สถานะปิดให้บริการ -->
+                <div id="lock-overlay-3" class="hidden absolute inset-0 bg-brand-dark/30 backdrop-blur-[1px] z-20 flex flex-col items-center justify-center p-4 select-none">
                     <div class="bg-brand-dark text-white px-4 py-2 rounded-xl border-2 border-white shadow-nb font-black text-xs sm:text-sm flex items-center gap-2">
                         <i class="fas fa-lock text-brand-coral"></i>
                         <span>ยังไม่เปิดให้บริการ</span>
@@ -353,7 +358,8 @@
 
             <!-- Card 4: Leveling & Atlas -->
             <div id="service-card-4" class="nb-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group cursor-pointer" onclick="handleCardClick(4)">
-                <div id="lock-overlay-4" class="hidden absolute inset-0 bg-brand-dark/25 backdrop-blur-[2px] z-20 flex flex-col items-center justify-center p-4">
+                <!-- Overlay สถานะปิดให้บริการ -->
+                <div id="lock-overlay-4" class="hidden absolute inset-0 bg-brand-dark/30 backdrop-blur-[1px] z-20 flex flex-col items-center justify-center p-4 select-none">
                     <div class="bg-brand-dark text-white px-4 py-2 rounded-xl border-2 border-white shadow-nb font-black text-xs sm:text-sm flex items-center gap-2">
                         <i class="fas fa-lock text-brand-coral"></i>
                         <span>ยังไม่เปิดให้บริการ</span>
@@ -389,7 +395,8 @@
 
             <!-- Card 5: Gold Farming -->
             <div id="service-card-5" class="nb-card rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group cursor-pointer" onclick="handleCardClick(5)">
-                <div id="lock-overlay-5" class="hidden absolute inset-0 bg-brand-dark/25 backdrop-blur-[2px] z-20 flex flex-col items-center justify-center p-4">
+                <!-- Overlay สถานะปิดให้บริการ -->
+                <div id="lock-overlay-5" class="hidden absolute inset-0 bg-brand-dark/30 backdrop-blur-[1px] z-20 flex flex-col items-center justify-center p-4 select-none">
                     <div class="bg-brand-dark text-white px-4 py-2 rounded-xl border-2 border-white shadow-nb font-black text-xs sm:text-sm flex items-center gap-2">
                         <i class="fas fa-lock text-brand-coral"></i>
                         <span>ยังไม่เปิดให้บริการ</span>
@@ -537,6 +544,7 @@
     <div id="detailModal" class="fixed inset-0 z-50 hidden flex items-center justify-center modal-backdrop p-4 opacity-0 transition-opacity duration-150" role="dialog" aria-modal="true">
         <div class="bg-brand-surface border-3 border-brand-dark rounded-3xl shadow-nb-lg w-full max-w-2xl max-h-[85vh] overflow-y-auto flex flex-col relative transform transition-transform duration-150 scale-95" id="detailModalContent">
             
+            <!-- Modal Header -->
             <div id="modalHeaderBg" class="p-5 border-b-3 border-brand-dark flex items-center justify-between bg-brand-yellow">
                 <div id="detailTitle-display" class="font-display font-black text-xl sm:text-2xl text-brand-dark">
                     <!-- Dynamic Title -->
@@ -547,10 +555,12 @@
                 </button>
             </div>
 
+            <!-- Modal Content Body -->
             <div class="p-6 bg-brand-canvas space-y-4" id="detailContent-display">
                 <!-- Dynamic Content -->
             </div>
 
+            <!-- Modal Footer -->
             <div class="p-4 bg-brand-surface border-t-3 border-brand-dark flex flex-col sm:flex-row items-center justify-between gap-3">
                 <button onclick="goToCalculatorFromModal()" class="nb-btn bg-brand-yellow text-brand-dark font-bold px-4 py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 w-full sm:w-auto">
                     <i class="fas fa-calculator"></i>
@@ -575,9 +585,10 @@
     </div>
 
     <script>
+        // Google Apps Script Web App Endpoint
         const GOOGLE_SHEET_API_URL = "https://script.google.com/macros/s/AKfycbxPn1ZRwTmKQXZHOY7lKagryWoXGuPm4AxXQewS4x-nDvfqb1XoXwbaXel3kbeBxLM7eA/exec";
 
-        // สถานะเริ่มต้นของ 5 บริการหลัก (true = เปิด, false = ปิด)
+        // สถานะการเปิด-ปิด 5 บริการหลัก (true = เปิดปกติ, false = ปิดและล็อกการ์ด)
         let serviceAvailability = {
             1: true,
             2: true,
@@ -586,6 +597,7 @@
             5: true
         };
 
+        // Default Prices & Services (Fallback Data)
         let priceData = {
             act_follow: { name: 'Act 1 - Endgame (เดินตาม)', price: 790 },
             act_pilot: { name: 'Act 1 - Endgame (ฝากไอดี)', price: 990 },
@@ -603,6 +615,7 @@
 
         const siteData = {};
 
+        // สร้างเนื้อหาของ Modal ตามราคาล่าสุด
         function buildSiteData() {
             siteData.detailTitleguide = `📖 วิธีการสั่งซื้อบริการ`;
             siteData.detailBgguide = 'bg-brand-yellow text-brand-dark';
@@ -624,7 +637,7 @@
                         </div>
                         <div class="flex items-center gap-3.5 bg-brand-surfaceAlt p-3.5 rounded-2xl border-2 border-brand-dark shadow-nb-sm">
                             <span class="w-8 h-8 rounded-xl bg-brand-yellow border-2 border-brand-dark flex items-center justify-center font-black text-sm flex-shrink-0">4</span>
-                            <span class="font-bold text-sm sm:text-base">กด <span class="text-brand-dark font-black">"ส่ง order ให้พ่อค้า"</span></span>
+                            <span class="font-bold text-sm sm:text-base">กด <span class="text-brand-dark font-black">"ส่ง order ให้พ่อค้า"</span> <span class="text-xs text-gray-600 font-semibold">(ระบบคัดลอกสรุปรายการให้อัตโนมัติและเปิดหน้าแชท)</span></span>
                         </div>
                         <div class="flex items-center gap-3.5 bg-brand-surfaceAlt p-3.5 rounded-2xl border-2 border-brand-dark shadow-nb-sm">
                             <span class="w-8 h-8 rounded-xl bg-brand-coral text-white border-2 border-brand-dark flex items-center justify-center font-black text-sm flex-shrink-0">5</span>
@@ -724,6 +737,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="bg-amber-100 border-2 border-amber-500 p-4 sm:p-5 rounded-2xl text-xs sm:text-sm font-semibold text-amber-950 flex items-start gap-3">
                         <i class="fas fa-triangle-exclamation text-amber-600 text-lg mt-0.5 flex-shrink-0"></i>
                         <p class="leading-relaxed"><b class="font-black text-amber-900">เงื่อนไขสำคัญ:</b> ตัวละครต้องอยู่ Act 2 และทำเควส <span class="font-black underline">"ทางผ่านผู้ทรยศ"</span> เรียบร้อยแล้ว จึงจะลงแต้ม 8 ได้</p>
@@ -757,6 +771,7 @@
                         <div class="font-display text-4xl sm:text-5xl font-black text-brand-dark my-2">
                             ${priceData.build_setup.price} <span class="text-base sm:text-lg font-bold">บาท</span>
                         </div>
+                        
                         <button onclick="addServiceByKey('build_setup')" class="nb-btn bg-brand-coral text-white font-black text-sm sm:text-base py-3 px-6 rounded-xl inline-flex items-center gap-2 shadow-nb-sm">
                             <i class="fas fa-cart-plus text-base"></i>
                             <span>+ ใส่ตะกร้า (${priceData.build_setup.price} ฿)</span>
@@ -768,6 +783,7 @@
             siteData.detailBg4 = 'bg-brand-purple text-white';
             siteData.detailContent4 = `
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-brand-dark">
+                    <!-- Section: Leveling -->
                     <div class="bg-brand-surfaceAlt p-3.5 sm:p-4 rounded-2xl border-2 border-brand-dark flex flex-col justify-between">
                         <div>
                             <h4 class="font-black text-sm sm:text-base mb-2.5 flex items-center gap-1.5 text-brand-dark">
@@ -806,6 +822,7 @@
                         </div>
                     </div>
 
+                    <!-- Section: Atlas -->
                     <div class="bg-brand-surfaceAlt p-3.5 sm:p-4 rounded-2xl border-2 border-brand-dark flex flex-col justify-between">
                         <div>
                             <h4 class="font-black text-sm sm:text-base mb-2.5 flex items-center gap-1.5 text-brand-dark">
@@ -874,7 +891,7 @@
 
         buildSiteData();
 
-        // ฟังก์ชันอัปเดตหน้าตาสีจืดจางและการล็อกการ์ด
+        // ฟังก์ชันอัปเดตสถานะการล็อกการ์ดและสีจืดจาง
         function renderServiceLocks() {
             for (let id = 1; id <= 5; id++) {
                 const card = document.getElementById(`service-card-${id}`);
@@ -902,60 +919,64 @@
             }
         }
 
-        // ดึงราคาและสถานะเปิด/ปิดจาก Google Sheets
+        // ดึงราคาและสถานะเปิด/ปิดจาก Google Sheets (ป้องกัน Cache ด้วย Timestamp)
         async function fetchPricesFromSheet() {
             try {
-                const response = await fetch(GOOGLE_SHEET_API_URL);
+                const cacheBusterUrl = `${GOOGLE_SHEET_API_URL}?t=${Date.now()}`;
+                const response = await fetch(cacheBusterUrl);
+                
                 if (response.ok) {
                     const data = await response.json();
                     
-                    // อัปเดตสถานะเปิด/ปิด (รองรับทั้งรูปแบบ data.services และ key ตรง)
+                    // 1. ตรวจสอบสถานะการเปิด-ปิด (service_1 ถึง service_5) จากโครงสร้าง services
                     if (data.services) {
                         for (const sId in data.services) {
                             serviceAvailability[sId] = Boolean(data.services[sId]);
                         }
                     }
 
-                    // อัปเดตข้อมูลราคา
+                    // 2. ดึงราคาและตรวจสอบคีย์ตรง (รองรับทั้งแบบ prices และแบบ root data)
                     const priceSource = data.prices || data;
                     for (const key in priceSource) {
+                        const item = priceSource[key];
                         if (priceData[key]) {
-                            if (priceSource[key].price !== undefined && priceSource[key].price !== null && priceSource[key].price !== '') {
-                                priceData[key].price = Number(priceSource[key].price);
+                            if (item.price !== undefined && item.price !== null && item.price !== '') {
+                                priceData[key].price = Number(item.price);
                             }
-                            if (priceSource[key].name) {
-                                priceData[key].name = priceSource[key].name;
+                            if (item.name) {
+                                priceData[key].name = item.name;
                             }
                         }
-                        // รองรับกรณีระบุ service_1 ใน priceSource
+
+                        // รองรับกรณีระบุ service_1 ในรายการแถวของชีต
                         if (key.startsWith('service_')) {
-                            const sid = key.replace('service_', '');
-                            if (priceSource[key].isOpen !== undefined) {
-                                serviceAvailability[sid] = Boolean(priceSource[key].isOpen);
+                            const sid = parseInt(key.replace('service_', ''));
+                            if (!isNaN(sid)) {
+                                if (item.isOpen !== undefined) {
+                                    serviceAvailability[sid] = Boolean(item.isOpen);
+                                } else if (item.price !== undefined && typeof item.price === 'boolean') {
+                                    serviceAvailability[sid] = item.price;
+                                }
                             }
                         }
                     }
 
+                    // อัปเดตหน้าตาและข้อมูลใหม่ทันที
                     buildSiteData();
                     renderServiceLocks();
 
-                    // ถ้ารีเฟรชแล้วโมดัลเปิดค้างอยู่
+                    // ถ้ารีเฟรชขณะเปิด Modal ค้างอยู่ ให้รีเฟรชเนื้อหาข้างในด้วย
                     const modal = document.getElementById('detailModal');
                     if (!modal.classList.contains('hidden') && currentOpenModalId !== null) {
                         document.getElementById('detailContent-display').innerHTML = siteData[`detailContent${currentOpenModalId}`];
                     }
                 }
             } catch (err) {
-                console.warn("⚠️ ไม่สามารถโหลดข้อมูลจาก Google Sheets ได้:", err);
+                console.warn("⚠️ ไม่สามารถโหลดข้อมูลสดจาก Google Sheets ได้:", err);
             }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            renderServiceLocks();
-            fetchPricesFromSheet();
-        });
-
-        // ดักจับการกดการ์ด (ถ้าปิดบริการ จะไม่ให้เปิดดูและแจ้งเตือน)
+        // จัดการเมื่อคลิกการ์ด (บล็อกการคลิกถ้าบริการถูกปิด)
         function handleCardClick(id) {
             if (serviceAvailability[id] === false) {
                 showToast('ขออภัย บริการนี้ยังไม่เปิดให้บริการในขณะนี้ครับ 🔒');
@@ -964,6 +985,7 @@
             openDetailView(id);
         }
 
+        // Modal Handlers
         let currentOpenModalId = null;
 
         function openDetailView(id) {
@@ -1134,6 +1156,12 @@
         function scrollToCalculator() {
             document.getElementById('price-calculator').scrollIntoView({ behavior: 'smooth' });
         }
+
+        // เริ่มต้นการทำงานเมื่อ DOM โหลดเสร็จ
+        window.addEventListener('DOMContentLoaded', () => {
+            renderServiceLocks();
+            fetchPricesFromSheet();
+        });
     </script>
 </body>
 </html>
